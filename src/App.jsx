@@ -9,6 +9,10 @@ const App = () => {
     { id: 2, name: "Taos" }
   ])
 
+  const randomIntFromInterval = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+
   const name = "Taos";
   const age = 25;
   const data = {
@@ -18,7 +22,11 @@ const App = () => {
   }
 
   const addNewTodo = (name) => {
-    alert(`call mee ${name}`)
+    const newTodo = {
+      id: randomIntFromInterval(1, 1000000),
+      name: name
+    }
+    setTodoList([...todoList, newTodo])
   }
 
 

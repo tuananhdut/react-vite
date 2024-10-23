@@ -7,7 +7,7 @@ const TodoNew = (props) => {
     const { addNewTodo } = props
 
     const handleClick = () => {
-        alert(`>> this is text = ${valueInput}`)
+        addNewTodo(valueInput)
     }
 
     const handleOnChange = (name) => {
