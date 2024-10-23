@@ -1,11 +1,17 @@
 import "./todo.css"
 const TodoData = (props) => {
-    const { name, data, age, todoList } = props
+    const { todoList } = props
     return (
         <div className="todo-data">
-            <div >My name is {name}</div>
-            <div >REACT</div>
-            <div >Watching Youtube</div>
+            {todoList.map((item, index) => {
+                //console.log(">>>", item, index)
+                return (
+                    <div className="todo-item" >
+                        <div>{item.name}</div>
+                        <button>Delete</button>
+                    </div>
+                )
+            })}
             <div>
                 {JSON.stringify(props.todoList)}
             </div>
