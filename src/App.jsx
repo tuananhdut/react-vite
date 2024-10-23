@@ -3,14 +3,16 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+// chữ cái đầu tiên của arrow function phải viết hoa
+// component =  html + css + js
+const MyComponent = () => {
+  return (
+    <div>Create application</div>
+  );
+}
+
 const App = () => {
   const [count, setCount] = useState(0)
-
-  const myFunction = () => {
-    console.log(">>> this is my arrow function")
-  }
-
-  myFunction();
 
   return (
     <>
@@ -23,6 +25,7 @@ const App = () => {
         </a>
       </div>
       <h1>HELLO WORLD</h1>
+      <MyComponent />
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
