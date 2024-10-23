@@ -1,7 +1,14 @@
 import "./components/todo/todo.css"
 import TodoNew from "./components/todo/TodoNew"
 import TodoData from "./components/todo/TodoData"
+import { useState } from "react"
 const App = () => {
+
+  const [todoList, setTodoList] = useState([
+    { id: 1, name: "tuan anh" },
+    { id: 2, name: "Taos" }
+  ])
+
   const name = "Taos";
   const age = 25;
   const data = {
@@ -25,6 +32,7 @@ const App = () => {
         name={name}
         age={age}
         data={data}
+        todoList={todoList}
       />
     </div>
   )
