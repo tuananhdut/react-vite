@@ -1,5 +1,8 @@
 import "./todo.css"
-const TodoNew = () => {
+const TodoNew = (props) => {
+    const { addNewTodo } = props
+
+    addNewTodo("Taos")
     return (
         <div className="todo-new">
             <input type="text" name="inputTodo" />
