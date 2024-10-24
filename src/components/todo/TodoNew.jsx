@@ -2,7 +2,7 @@ import { useState } from "react"
 import "./todo.css"
 const TodoNew = (props) => {
     //useState hook (getter/ setter)
-    const [valueInput, setValueInput] = useState("taos")
+    const [valueInput, setValueInput] = useState("")
     const { addNewTodo } = props
 
     const handleClick = () => {
