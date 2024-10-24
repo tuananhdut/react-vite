@@ -16,9 +16,12 @@ const UserFrom = () => {
                 message: "create user",
                 description: "tao user thanh cong"
             })
+        } else {
+            notification.error({
+                message: "Error create user",
+                description: JSON.stringify(res.message)
+            })
         }
-
-        console.log(res.data)
     }
 
     return (
