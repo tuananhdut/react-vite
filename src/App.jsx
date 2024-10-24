@@ -10,8 +10,6 @@ const App = () => {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 
-
-
   const addNewTodo = (name) => {
     const newTodo = {
       id: randomIntFromInterval(1, 1000000),
@@ -20,16 +18,18 @@ const App = () => {
     setTodoList([...todoList, newTodo])
   }
 
-
   return (
     <div className="todo-container">
       <div className="todo-title">TODO LIST</div>
       <TodoNew
         addNewTodo={addNewTodo}
       />
-      <TodoData
-        todoList={todoList}
-      />
+      {todoList.length > 0 &&
+        <TodoData
+          todoList={todoList}
+        />
+      }
+
     </div>
   )
 }
