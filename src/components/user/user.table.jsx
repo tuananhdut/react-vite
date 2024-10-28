@@ -1,9 +1,13 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Flex, Space, Table, Tag } from 'antd';
 import UpdateUserModel from './update.model.user';
+import { useState } from 'react';
 
 const UserTable = (props) => {
     const { dataUser } = props;
+    const [isUpdateModelUser, setIsUpdateModelUser] = useState(false);
+    const [dataUpdateUser, setDataUpdateUser] = useState(null);
+
 
     const columns = [
         {
@@ -32,13 +36,18 @@ const UserTable = (props) => {
             key: 'action',
             render: (_, record) => (
                 <div style={{ display: "flex", gap: "20px" }}>
-                    <EditOutlined style={{ cursor: "pointer", color: "orange" }} />
+                    <EditOutlined
+                        onClick={() => {
+                            setIsUpdateModelUser(true)
+                            setDataUpdateUser(record)
+                        }}
+                        style={{ cursor: "pointer", color: "orange" }}
+                    />
                     <DeleteOutlined style={{ cursor: 'pointer', color: "red" }} />
                 </div>
             ),
         },
     ];
-
 
 
     return (
@@ -48,7 +57,12 @@ const UserTable = (props) => {
                 dataSource={dataUser}
                 rowKey={"_id"}
             />
-            <UpdateUserModel />
+            <UpdateUserModel
+                isUpdateModelUser={isUpdateModelUser}
+                setIsUpdateModelUser={setIsUpdateModelUser}
+                dataUpdateUser={dataUpdateUser}
+                setDataUpdateUser={setDataUpdateUser}
+            />
         </>
 
     )
