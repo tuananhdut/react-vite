@@ -2,11 +2,14 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Flex, Space, Table, Tag } from 'antd';
 import UpdateUserModel from './update.model.user';
 import { useState } from 'react';
+import ViewUserDetail from './view.user.detail';
 
 const UserTable = (props) => {
     const { dataUser, loadUser } = props;
     const [isUpdateModelUser, setIsUpdateModelUser] = useState(false);
     const [dataUpdateUser, setDataUpdateUser] = useState(null);
+    const [isViewUserDetail, setIsViewUserDetail] = useState(false);
+    const [dataUserDetail, setDataUserDetail] = useState(null);
 
 
     const columns = [
@@ -15,7 +18,10 @@ const UserTable = (props) => {
             dataIndex: '_id',
             render: (_, record) => {
                 return (
-                    <a href="#">{record._id}</a>
+                    <a onClick={() => {
+                        setIsViewUserDetail(true)
+                        setDataUserDetail(record)
+                    }} href="#">{record._id}</a>
                 )
             }
         },
@@ -63,6 +69,12 @@ const UserTable = (props) => {
                 dataUpdateUser={dataUpdateUser}
                 setDataUpdateUser={setDataUpdateUser}
                 loadUser={loadUser}
+            />
+            <ViewUserDetail
+                isViewUserDetail={isViewUserDetail}
+                setIsViewUserDetail={setIsViewUserDetail}
+                dataUserDetail={dataUserDetail}
+                setDataUserDetail={setDataUserDetail}
             />
         </>
 
