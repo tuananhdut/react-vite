@@ -1,8 +1,9 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Flex, Space, Table, Tag } from 'antd';
+import { Flex, notification, Popconfirm, Space, Table, Tag } from 'antd';
 import UpdateUserModel from './update.model.user';
 import { useState } from 'react';
 import ViewUserDetail from './view.user.detail';
+import { deleteUserApi } from '../../services/api.service';
 
 const UserTable = (props) => {
     const { dataUser, loadUser } = props;
@@ -10,6 +11,22 @@ const UserTable = (props) => {
     const [dataUpdateUser, setDataUpdateUser] = useState(null);
     const [isViewUserDetail, setIsViewUserDetail] = useState(false);
     const [dataUserDetail, setDataUserDetail] = useState(null);
+
+    const handleDeleteUser = async (id) => {
+        const res = await deleteUserApi(id)
+        if (res.data) {
+            notification.success({
+                message: "Delete User",
+                description: "Xóa Người Dùng Thành Công"
+            })
+            loadUser()
+        } else {
+            notification.error({
+                message: "Delete User",
+                description: JSON.stringify(res.message)
+            })
+        }
+    }
 
 
     const columns = [
@@ -49,7 +66,16 @@ const UserTable = (props) => {
                         }}
                         style={{ cursor: "pointer", color: "orange" }}
                     />
-                    <DeleteOutlined style={{ cursor: 'pointer', color: "red" }} />
+                    <Popconfirm
+                        title="Delete user"
+                        description="Bạn muốn xóa người dùng này ?"
+                        onConfirm={() => handleDeleteUser(record._id)}
+                        okText="Yes"
+                        cancelText="No"
+                        placement="leftTop"
+                    >
+                        <DeleteOutlined style={{ cursor: 'pointer', color: "red" }} />
+                    </Popconfirm>
                 </div>
             ),
         },
@@ -76,6 +102,7 @@ const UserTable = (props) => {
                 dataUserDetail={dataUserDetail}
                 setDataUserDetail={setDataUserDetail}
             />
+
         </>
 
     )
