@@ -21,7 +21,10 @@ const UserPage = () => {
     return (
         <div style={{ padding: "20px" }}>
             <UserFrom loadUser={loadUser} />
-            <UserTable dataUser={dataUser} />
+            <UserTable
+                dataUser={dataUser}
+                loadUser={loadUser}
+            />
         </div>
     )
 }

@@ -4,7 +4,7 @@ import UpdateUserModel from './update.model.user';
 import { useState } from 'react';
 
 const UserTable = (props) => {
-    const { dataUser } = props;
+    const { dataUser, loadUser } = props;
     const [isUpdateModelUser, setIsUpdateModelUser] = useState(false);
     const [dataUpdateUser, setDataUpdateUser] = useState(null);
 
@@ -62,6 +62,7 @@ const UserTable = (props) => {
                 setIsUpdateModelUser={setIsUpdateModelUser}
                 dataUpdateUser={dataUpdateUser}
                 setDataUpdateUser={setDataUpdateUser}
+                loadUser={loadUser}
             />
         </>
 

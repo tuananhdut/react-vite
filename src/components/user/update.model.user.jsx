@@ -8,7 +8,7 @@ const UpdateUserModel = (props) => {
     const [fullName, setFullName] = useState("")
     const [id, setID] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
-    const { setIsUpdateModelUser, isUpdateModelUser, setDataUpdateUser, dataUpdateUser } = props
+    const { setIsUpdateModelUser, isUpdateModelUser, setDataUpdateUser, dataUpdateUser, loadUser } = props
 
     useEffect(() => {
         if (dataUpdateUser) {
@@ -26,12 +26,31 @@ const UpdateUserModel = (props) => {
         setDataUpdateUser(null)
     }
 
+    const handleSaveBtn = async () => {
+        const res = await updateUserApi(id, fullName, phoneNumber)
+        if (res.data) {
+            notification.success({
+                message: "Update User Success",
+                description: "Cập nhật thành công"
+            })
+            resetAndCloseUpdateModalUser()
+            loadUser()
+        } else {
+            notification.error({
+                message: "Update User error",
+                description: JSON.stringify(res.message)
+            }
+            )
+        }
+
+    }
+
 
     return (
         <Modal
             title="Update User"
             open={isUpdateModelUser}
-            onOk={() => setIsUpdateModelUser(false)}
+            onOk={() => handleSaveBtn()}
             onCancel={() => resetAndCloseUpdateModalUser()}
             maskClosable={false}
             okText={"Save"}
