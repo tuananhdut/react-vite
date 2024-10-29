@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Button, Drawer } from 'antd';
+import { Drawer } from 'antd';
 
 const ViewUserDetail = (props) => {
     const { isViewUserDetail, setIsViewUserDetail, dataUserDetail, setDataUserDetail } = props

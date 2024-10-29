@@ -1,5 +1,5 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Flex, notification, Popconfirm, Space, Table, Tag } from 'antd';
+import { notification, Popconfirm, Table } from 'antd';
 import UpdateUserModel from './update.model.user';
 import { useState } from 'react';
 import ViewUserDetail from './view.user.detail';

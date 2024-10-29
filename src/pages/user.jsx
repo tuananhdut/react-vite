@@ -1,6 +1,6 @@
 import UserFrom from "../components/user/user.form"
 import UserTable from "../components/user/user.table"
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchAllUserAPI } from "../services/api.service"
 
 

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
-import { createUserApi, updateUserApi } from "../../services/api.service"
+import { updateUserApi } from "../../services/api.service"
 import { Input, notification, Modal } from 'antd';
-import { TrophyOutlined } from "@ant-design/icons";
 
 
 const UpdateUserModel = (props) => {
