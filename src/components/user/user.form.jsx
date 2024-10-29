@@ -41,8 +41,8 @@ const UserFrom = (props) => {
 
     return (
         <>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <h3>Table User</h3>
+            <div style={{ display: "flex", justifyContent: "space-between", margin: "15px" }}>
+                <h3>TABLE USERS</h3>
                 <Button type="primary"
                     onClick={() => { setIsModalOpen(true) }}
                 >Create User</Button>
