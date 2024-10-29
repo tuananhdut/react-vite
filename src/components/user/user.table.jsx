@@ -6,7 +6,7 @@ import ViewUserDetail from './view.user.detail';
 import { deleteUserApi } from '../../services/api.service';
 
 const UserTable = (props) => {
-    const { dataUser, loadUser } = props;
+    const { dataUser, loadUser, current, pageSize, total, setCurrent, setPageSize } = props;
     const [isUpdateModelUser, setIsUpdateModelUser] = useState(false);
     const [dataUpdateUser, setDataUpdateUser] = useState(null);
     const [isViewUserDetail, setIsViewUserDetail] = useState(false);
@@ -86,6 +86,9 @@ const UserTable = (props) => {
         },
     ];
 
+    const onChange = (pagination, filters, sorter, extra) => {
+        console.log({ pagination, filters, sorter, extra })
+    }
 
     return (
         <>
@@ -93,6 +96,14 @@ const UserTable = (props) => {
                 columns={columns}
                 dataSource={dataUser}
                 rowKey={"_id"}
+                pagination={{
+                    current: current,
+                    pageSize: pageSize,
+                    showSizeChanger: true,
+                    total: total,
+                    showTotal: (total, range) => { return (<div>{range[0]}-{range[1]} trên {total} row</div>) }
+                }}
+                onChange={onChange}
             />
             <UpdateUserModel
                 isUpdateModelUser={isUpdateModelUser}
