@@ -33,7 +33,7 @@ const UserTable = (props) => {
         {
             title: 'STT',
             dataIndex: '',
-            render: (id, record, index) => { ++index; return index; }
+            render: (id, record, index) => { return (current - 1) * pageSize + ++index; }
         },
         {
             title: 'ID',
@@ -87,6 +87,16 @@ const UserTable = (props) => {
     ];
 
     const onChange = (pagination, filters, sorter, extra) => {
+        if (pagination && pagination.current) {
+            if (+pagination.current !== +current) {
+                setCurrent(+pagination.current)
+            }
+        }
+        if (pagination && pagination.pageSize) {
+            if (+pagination.pageSize !== +pageSize) {
+                setPageSize(+pagination.pageSize)
+            }
+        }
         console.log({ pagination, filters, sorter, extra })
     }
 
@@ -101,7 +111,6 @@ const UserTable = (props) => {
                     pageSize: pageSize,
                     showSizeChanger: true,
                     total: total,
-                    showTotal: (total, range) => { return (<div>{range[0]}-{range[1]} trên {total} row</div>) }
                 }}
                 onChange={onChange}
             />
