@@ -101,6 +101,7 @@ const UserTable = (props) => {
                 setIsViewUserDetail={setIsViewUserDetail}
                 dataUserDetail={dataUserDetail}
                 setDataUserDetail={setDataUserDetail}
+                loadUser={loadUser}
             />
 
         </>

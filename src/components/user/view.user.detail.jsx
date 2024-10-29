@@ -1,8 +1,9 @@
-import { Button, Drawer } from 'antd';
+import { Button, Drawer, notification } from 'antd';
 import { useState } from 'react';
+import { handleUploadFile, updateUserApi, updateUserAvatarApi } from '../../services/api.service';
 
 const ViewUserDetail = (props) => {
-    const { isViewUserDetail, setIsViewUserDetail, dataUserDetail, setDataUserDetail } = props
+    const { isViewUserDetail, setIsViewUserDetail, dataUserDetail, setDataUserDetail, loadUser } = props
     const [selectFile, setSelectFile] = useState(null)
     const [preview, setPreview] = useState(null);
 
@@ -17,6 +18,37 @@ const ViewUserDetail = (props) => {
         if (file) {
             setSelectFile(file)
             setPreview(URL.createObjectURL(file))
+        }
+    }
+
+    const handleUserUpdateAvatar = async () => {
+        //call API Upload file
+        const resUpload = await handleUploadFile(selectFile, "avatar")
+        if (resUpload) {
+            const newAvatar = resUpload.data.fileUploaded
+            const resUpdateAvatar = await updateUserAvatarApi(dataUserDetail._id, dataUserDetail.fullName, dataUserDetail.phone, newAvatar)
+
+            if (resUpdateAvatar.data) {
+                setIsViewUserDetail(false)
+                setSelectFile(null)
+                setPreview(null)
+                await loadUser()
+
+                notification.success({
+                    message: "Update Avatar",
+                    description: "Thêm ảnh thành công"
+                })
+            } else {
+                notification.error({
+                    message: "Update Avatar",
+                    description: JSON.stringify(resUpdateAvatar.message)
+                })
+            }
+        } else {
+            notification.error({
+                message: "Update Avatar",
+                description: JSON.stringify(resUpload.message)
+            })
         }
     }
     return (
@@ -58,13 +90,16 @@ const ViewUserDetail = (props) => {
                             }}>Upload Avatar</label>
                         <input type="file" hidden id='btmUpload' onChange={(event) => handleOnchageFile(event)} />
                     </div>
-                    {preview && <div>
-                        <img style={{
-                            width: "250px",
-                            margin: "8px 0",
-                            border: "1px solid #ccc"
-                        }} src={preview} />
-                    </div>}
+                    {preview && <>
+                        <div>
+                            <img style={{
+                                width: "250px",
+                                margin: "8px 0",
+                                border: "1px solid #ccc"
+                            }} src={preview} />
+                        </div>
+                        <Button type="primary" onClick={() => handleUserUpdateAvatar()}>Save</Button>
+                    </>}
 
 
                 </> : <>
