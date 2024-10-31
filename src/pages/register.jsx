@@ -1,9 +1,33 @@
-import { Input, Button, Form } from "antd"
+import { Input, Button, Form, notification } from "antd"
+import { registerAPI } from "../services/api.service"
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
     const [form] = Form.useForm()
-    const onFinish = (value) => {
-        console.log(value)
+    const navigate = useNavigate();
+
+
+    const onFinish = async (values) => {
+        console.log(values)
+        //call API
+        const resRegister = await registerAPI(
+            values.fullName,
+            values.email,
+            values.password,
+            values.phone)
+
+        if (resRegister.data) {
+            notification.success({
+                message: "Register User",
+                description: "đăng ký user thành công"
+            })
+            navigate("/login")
+        } else {
+            notification.error({
+                message: "Register User",
+                description: JSON.stringify(resRegister.message)
+            })
+        }
     }
     return (
         <div style={{ margin: "50px" }}>
@@ -21,8 +45,8 @@ const RegisterPage = () => {
                     name="fullName"
                     rules={[
                         {
-                            required: false,
-                            message: 'Please input your username!',
+                            required: true,
+                            message: 'Please input your Full Name!',
                         },
                     ]}
                 >
@@ -33,8 +57,9 @@ const RegisterPage = () => {
                     name="email"
                     rules={[
                         {
-                            required: false,
-                            message: 'Please input your username!',
+                            required: true,
+                            type: "email",
+                            message: 'Please input your Email!',
                         },
                     ]}
                 >
@@ -45,8 +70,8 @@ const RegisterPage = () => {
                     name="password"
                     rules={[
                         {
-                            required: false,
-                            message: 'Please input your username!',
+                            required: true,
+                            message: 'Please input your password!',
                         },
                     ]}
                 >
@@ -58,8 +83,9 @@ const RegisterPage = () => {
                     rules={[
                         {
                             required: false,
-                            message: 'Please input your username!',
-                        },
+                            pattern: new RegExp(/\d+/g),
+                            message: "Wrong format!"
+                        }
                     ]}
                 >
                     <Input />
@@ -68,6 +94,16 @@ const RegisterPage = () => {
                 {/* <button type="submit"  >Register</button> */}
 
                 <Button onClick={() => form.submit()} type="primary">Register</Button>
+
+
+                <Button onClick={() => {
+                    form.setFieldsValue({
+                        fullName: "toas",
+                        email: "tuanhaoggg@gmail.com"
+                    })
+                    console.log(form.getFieldsValue())
+
+                }} type="primary">Change</Button>
 
             </Form >
 
