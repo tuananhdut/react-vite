@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import React, { useState } from 'react';
-import { BoldOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons';
+import { BoldOutlined, HomeOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 
 const Header = () => {
@@ -25,7 +25,21 @@ const Header = () => {
             key: 'books',
             icon: <BoldOutlined />
         },
-
+        {
+            label: 'Setting',
+            key: 'SubMenu',
+            icon: <SettingOutlined />,
+            children: [
+                {
+                    label: <Link to={"/login"}>Login</Link>,
+                    key: "login"
+                },
+                {
+                    label: <Link to={"/register"}>Register</Link>,
+                    key: "register"
+                }
+            ],
+        },
     ];
     return (
         <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
