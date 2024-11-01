@@ -1,4 +1,4 @@
-import { Input, Button, Form, notification } from "antd"
+import { Input, Button, Form, notification, Col, Row } from "antd"
 import { registerAPI } from "../services/api.service"
 import { useNavigate } from "react-router-dom";
 
@@ -30,7 +30,9 @@ const RegisterPage = () => {
         }
     }
     return (
-        <div style={{ margin: "50px" }}>
+        <div style={{
+            margin: "50px 20px"
+        }}>
             <Form
                 layout="vertical"
                 name="basic"
@@ -40,70 +42,77 @@ const RegisterPage = () => {
                 // onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
-                <Form.Item
-                    label="Full Name"
-                    name="fullName"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your Full Name!',
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    label="Email"
-                    name="email"
-                    rules={[
-                        {
-                            required: true,
-                            type: "email",
-                            message: 'Please input your Email!',
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your password!',
-                        },
-                    ]}
-                >
-                    <Input.Password />
-                </Form.Item>
-                <Form.Item
-                    label="Phone Number"
-                    name="phone"
-                    rules={[
-                        {
-                            required: false,
-                            pattern: new RegExp(/\d+/g),
-                            message: "Wrong format!"
-                        }
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
+                <Row justify={"center"}>
+                    <Col xs={24} sm={20} md={18} lg={16} xl={10} >
+                        <Form.Item
+                            label="Full Name"
+                            name="fullName"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your Full Name!',
+                                },
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
 
-                {/* <button type="submit"  >Register</button> */}
+                        <Form.Item
+                            label="Email"
+                            name="email"
+                            rules={[
+                                {
+                                    required: true,
+                                    type: "email",
+                                    message: 'Please input your Email!',
+                                },
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
 
-                <Button onClick={() => form.submit()} type="primary">Register</Button>
+                        <Form.Item
+                            label="Password"
+                            name="password"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your password!',
+                                },
+                            ]}
+                        >
+                            <Input.Password />
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Phone Number"
+                            name="phone"
+                            rules={[
+                                {
+                                    required: false,
+                                    pattern: new RegExp(/\d+/g),
+                                    message: "Wrong format!"
+                                }
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
+
+                        {/* <button type="submit"  >Register</button> */}
+
+                        <Button onClick={() => form.submit()} type="primary">Register</Button>
+                    </Col>
+                </Row>
 
 
-                <Button onClick={() => {
+                {/* <Button onClick={() => {
                     form.setFieldsValue({
                         fullName: "toas",
                         email: "tuanhaoggg@gmail.com"
                     })
                     console.log(form.getFieldsValue())
 
-                }} type="primary">Change</Button>
+                }} type="primary">Change</Button> */}
 
             </Form >
 
