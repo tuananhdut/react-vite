@@ -1,10 +1,29 @@
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Col, Divider, Form, Input, Row } from 'antd';
+import { Button, Checkbox, Col, Divider, Form, Input, message, notification, Row } from 'antd';
 import { useForm } from 'antd/es/form/Form';
-import { Link } from 'react-router-dom';
+import { json, Link, Navigate, useNavigate } from 'react-router-dom';
+import { loginAPI } from '../services/api.service';
+import { useState } from 'react';
 
 const LoginPage = () => {
     const [form] = useForm()
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false)
+
+    const onFinish = async (values) => {
+        setLoading(true)
+        const res = await loginAPI(values.email, values.password)
+        if (res.data) {
+            message.success("Đăng nhập thành công"),
+                navigate("/")
+        } else {
+            notification.error({
+                message: "Login user",
+                description: JSON.stringify(res.message)
+            })
+        }
+        setLoading(false)
+    }
 
     return (
         <Row justify={'center'} style={{ margin: "20px" }}>
@@ -16,7 +35,7 @@ const LoginPage = () => {
                         name="basic"
                         form={form}
 
-                        // onFinish={onFinish}
+                        onFinish={onFinish}
                         // onFinishFailed={onFinishFailed}
                         autoComplete="off"
                     >
@@ -50,7 +69,8 @@ const LoginPage = () => {
                             <Input.Password />
                         </Form.Item>
                         <Form.Item >
-                            <Button type="primary" onClick={() => { form.submit() }}>
+                            <Button type="primary" onClick={() => { form.submit() }}
+                                loading={loading}>
                                 Login
                             </Button>
                             <Link style={{ float: "right" }} to={"/"}>Go to homepage <ArrowRightOutlined /></Link>
