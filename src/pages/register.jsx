@@ -8,7 +8,7 @@ const RegisterPage = () => {
 
 
     const onFinish = async (values) => {
-        console.log(values)
+        // console.log(values)
         //call API
         const resRegister = await registerAPI(
             values.fullName,

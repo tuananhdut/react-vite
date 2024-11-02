@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom"
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { BoldOutlined, HomeOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
+import { AuthContext } from "../context/auth.context";
 
 const Header = () => {
     const [current, setCurrent] = useState('');
+    const data = useContext(AuthContext);
+    console.log(data)
+
     const onClick = (e) => {
         setCurrent(e.key);
     };
